@@ -152,6 +152,11 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
 .rep-card>p{font-size:14px;color:var(--ink-3);line-height:1.6;margin-bottom:16px}
 .rep-field{margin-bottom:14px}
 .rep-label{display:block;font-size:14px;font-weight:700;color:var(--ink-2);margin-bottom:7px}
+.rep-label small{font-weight:600;color:var(--ink-3)}
+.rep-hint{font-size:12.5px;color:var(--ink-3);line-height:1.55;margin-top:6px}
+.bday-box{background:linear-gradient(135deg,#FFF8E6,#FFF1CC);border:1.5px dashed var(--amber-line);border-radius:var(--r-sm);padding:14px;margin-bottom:14px}
+.bday-box .rep-label{margin-bottom:8px}
+input[type=date].field-input{min-height:50px;-webkit-appearance:none;appearance:none}
 .rep-agree{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--border-md);border-radius:var(--r-sm);padding:14px;cursor:pointer;font-size:13.5px;line-height:1.6;color:var(--ink-2)}
 .rep-agree input{margin-top:3px;flex-shrink:0;width:18px;height:18px;accent-color:var(--green)}
 .rep-err{display:none;background:var(--red-pale);color:var(--red);border:1px solid rgba(181,42,42,.2);border-radius:var(--r-sm);padding:10px 12px;font-size:14px;margin-top:12px}
@@ -266,7 +271,7 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
     <div class="stats">
       <div class="stat"><b>8</b><span>pertanyaan singkat</span></div>
       <div class="stat"><b>2&prime;</b><span>Langsung dari HP</span></div>
-      <div class="stat"><b>🎁</b><span>Free Gift</span></div>
+      <div class="stat"><b>🎁</b><span>Free Voucher</span></div>
     </div>
     <button id="mg-start" class="btn-prim hero-cta" type="button" onclick="MG.open()">Isi Survey Mosgo (2 menit)</button>
     <p class="cta-note"><strong>Gratis,</strong> jawaban Anda bersifat rahasia.<br>Survey ini terpisah dari ulasan di marketplace.</p>
@@ -277,7 +282,7 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
 
 <div class="ticket" aria-label="Voucher untuk Anda">
   <div class="t-l"><i>🎟️</i><b>VOUCHER</b></div>
-  <div class="t-r"><b>Disc up to 100%.</b><span>Pelanggan yang bersedia repeat order mendapat voucher gratis lewat WhatsApp.</span></div>
+  <div class="t-r"><b>Diskon 10% sampai 50% + bonus ulang tahun 🎂</b><span>Setiap peserta survey mendapat voucher gratis lewat WhatsApp. Isi tanggal lahir (opsional) untuk bonus voucher ulang tahun.</span></div>
 </div>
 
 <div class="chat-section" id="mg-chat-section" role="region" aria-labelledby="mg-chat-title" aria-hidden="true">
@@ -291,7 +296,7 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
 <section class="sec"><span class="sec-kicker">Cara kerja</span><h2 class="sec-title">Hanya 3 Langkah Saja.</h2><p class="sec-sub">Praktis, Simple dan Mudah.</p>
 <div class="steps">
 <div class="step"><span>1</span><div><b>Jawab 8 pertanyaan</b><p>Ceritakan pengalaman Anda bersama produk Kami.</p></div></div>
-<div class="step"><span>2</span><div><b>Ceritakan Harapan Anda dengan produk kami</b><p>Jika Anda bersedia membeli lagi, Anda bisa mengklaim voucher gratis.</p></div></div>
+<div class="step"><span>2</span><div><b>Ceritakan Harapan Anda dengan produk kami</b><p>Daftarkan nomor WhatsApp untuk klaim voucher. Isi tanggal lahir (opsional) untuk bonus ulang tahun.</p></div></div>
 <div class="step"><span>3</span><div><b>Free Voucher Belanja akan dikirimkan melalui Whatsapp Anda</b><p>Daftarkan nomor Anda, lalu tekan tombol konfirmasi agar voucher terkirim.</p></div></div>
 </div>
 <button class="btn-prim green sec-cta" type="button" onclick="MG.open()">Mulai Survey</button>
@@ -314,15 +319,17 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
 <div class="safety"><strong>Keselamatan:</strong> Gunakan sesuai petunjuk pada label. Simpan jauh dari jangkauan anak-anak, hewan peliharaan, dan makanan. Cuci tangan setelah memakai. Jika terjadi tertelan atau paparan tidak sengaja, segera hubungi fasilitas kesehatan terdekat dan bawa kemasan produk.</div>
 </section>
 
-<div class="legal-disclaimer"><strong>Disclaimer:</strong> Halaman ini adalah survey kepuasan pelanggan Mosgo. Jawaban dipakai untuk peningkatan produk dan layanan. Nomor WhatsApp hanya dipakai untuk mengirim voucher yang Anda minta. Voucher tunduk pada syarat dan ketentuan yang tertera saat dikirim.</div>
+<div class="legal-disclaimer"><strong>Disclaimer:</strong> Halaman ini adalah survey kepuasan pelanggan Mosgo. Jawaban dipakai untuk peningkatan produk dan layanan. Nomor WhatsApp dan tanggal lahir (bila diisi) hanya dipakai untuk mengirim voucher yang Anda minta. Voucher tunduk pada syarat dan ketentuan yang tertera saat dikirim.</div>
 </div></div></div>
 
 <script>
 (function () {
   /* ====== KONFIGURASI (ganti sebelum publish) ====== */
-  const SCRIPT_URL = 'GANTI_DENGAN_URL_APPS_SCRIPT';   // endpoint Apps Script / webhook CRM
-  const WA_BUSINESS = '628XXXXXXXXXX';                  // nomor WhatsApp bisnis Mosgo (format 62...)
-  const VOUCHER_FOR = ['ya'];                           // jawaban repeat order yang berhak voucher: ['ya'] atau ['ya','mungkin']
+  const SCRIPT_URL = 'GANTI_DENGAN_URL_APPS_SCRIPT';   // URL Web App Apps Script
+  const WA_BUSINESS = '6281553016909';                  // nomor WhatsApp bisnis Mosgo (format 62...)
+  const APP_KEY = '';                                   // isi sama persis dengan APP_KEY di Script Properties (kosongkan bila tidak dipakai)
+  const VOUCHER_FOR = ['ya','mungkin','tidak'];         // semua jawaban berhak voucher (kode & diskon ditentukan di server)
+  const MIN_AGE = 18;                                   // harus sama dengan CFG.MIN_AGE di GAS
   const MAX_USE = 2;
   const BOT = '🌿';
   const DEMO = SCRIPT_URL.indexOf('GANTI_') === 0;     // mode demo: tidak mengirim data ke server
@@ -351,6 +358,20 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
   const esc = function(t){ return t==null?'':String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); };
   const nm = function(){ return '<strong>'+esc(nama||'Kak')+'</strong>'; };
   function normWA(v){ let d=String(v).replace(/\D/g,''); if(d.indexOf('0')===0) d='62'+d.slice(1); else if(d.indexOf('8')===0) d='62'+d; return d; }
+
+  /* tanggal lahir: kembalikan {y,m,d,age} atau null bila tidak valid */
+  function parseDob(s){
+    const mt=String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})$/); if(!mt) return null;
+    const y=+mt[1], m=+mt[2], d=+mt[3];
+    if(y<1900||m<1||m>12||d<1||d>31) return null;
+    const c=new Date(Date.UTC(y,m-1,d));
+    if(c.getUTCFullYear()!==y||c.getUTCMonth()!==m-1||c.getUTCDate()!==d) return null;
+    const now=new Date(); let age=now.getFullYear()-y;
+    if(now.getMonth()+1<m||(now.getMonth()+1===m&&now.getDate()<d)) age--;
+    if(age<0||age>120) return null;
+    return {y:y,m:m,d:d,age:age};
+  }
+  function todayISO(){ const t=new Date(); return t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2); }
 
   function scrollDown(){ const b=$('mg-msgs'); if(b) b.scrollTop=b.scrollHeight; }
   function msg(cls, av, html, bc){
@@ -498,16 +519,18 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
 
   function afterSummary(){
     const rv = A.repeat ? A.repeat.val : 'tidak';
-    if(VOUCHER_FOR.indexOf(rv)!==-1){ voucherOffer(); return; }
+    if(VOUCHER_FOR.indexOf(rv)!==-1){ voucherOffer(rv); return; }
     typing(800,function(){
-      bot('Terima kasih sudah meluangkan waktu, '+nm()+'. Jika suatu hari Anda berubah pikiran tentang membeli lagi, kami selalu senang mendengar dari Anda. 🌿');
+      bot('Terima kasih sudah meluangkan waktu, '+nm()+'. Kami selalu senang mendengar dari Anda. 🌿');
       setProgress(100); sendLite();
     });
   }
 
   function payload(extra){
     const ans={}; QS.forEach(function(q){ if(A[q.k]) ans[q.k]={t:A[q.k].text,v:A[q.k].val}; });
-    return Object.assign({ nama:nama, platform:platform, jawaban:ans, saran:komentar, repeat:(A.repeat&&A.repeat.val)||'', perlu_tindak_lanjut:flagged, ref:REF }, extra||{});
+    const base={ nama:nama, platform:platform, jawaban:ans, saran:komentar, repeat:(A.repeat&&A.repeat.val)||'', perlu_tindak_lanjut:flagged, ref:REF };
+    if(APP_KEY) base.k=APP_KEY;
+    return Object.assign(base, extra||{});
   }
   /* kirim data survey tanpa nomor WA (peserta yang tidak mengklaim voucher), hanya jika ada endpoint */
   function sendLite(){
@@ -515,15 +538,21 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
     try{ fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload({action:'save_survey'}))}).catch(function(){}); }catch(e){}
   }
 
-  function voucherOffer(){
+  function voucherOffer(rv){
+    const intro = rv==='ya' ? 'Terima kasih sudah bersedia membeli lagi, '
+                : rv==='mungkin' ? 'Terima kasih sudah jujur, '
+                : 'Terima kasih atas kejujuran Anda, ';
     typing(900,function(){
-      bot('Karena Anda bersedia membeli lagi, ada <strong>voucher gratis</strong> untuk Anda, '+nm()+'. 🎁');
+      bot(intro+nm()+'. Ada <strong>voucher gratis</strong> untuk Anda. 🎁',null);
       setTimeout(function(){
         const h='<div class="rep-card" id="mg-rep"><h4>🎁 Klaim Voucher Gratis Mosgo</h4>'+
           '<p>Daftarkan nomor WhatsApp Anda. Voucher dikirim <strong>setelah Anda menekan tombol konfirmasi WhatsApp</strong> pada langkah berikutnya.</p>'+
           '<div class="voucher"><i>🎟️</i><div><b>Voucher pembelian ulang</b><span>Kode voucher dikirim lewat WhatsApp dan berlaku untuk pembelian berikutnya.</span></div></div>'+
           '<div class="rep-field" style="margin-top:16px"><label class="rep-label" for="mg-wa">Nomor WhatsApp Aktif *</label><input type="tel" id="mg-wa" class="field-input" inputmode="tel" placeholder="Contoh: 0812XXXXXXXX"></div>'+
-          '<label class="rep-agree" for="mg-agree"><input type="checkbox" id="mg-agree"><span>Ya, saya bersedia menerima voucher lewat WhatsApp, dan setuju nama, nomor WhatsApp, serta jawaban survey saya disimpan oleh Mosgo untuk pengiriman voucher dan perbaikan layanan.</span></label>'+
+          '<div class="bday-box"><label class="rep-label" for="mg-dob">🎂 Tanggal lahir <small>(opsional)</small></label>'+
+          '<input type="date" id="mg-dob" class="field-input" min="1900-01-01" max="'+todayISO()+'">'+
+          '<p class="rep-hint">Isi untuk mendapat <strong>bonus voucher ulang tahun</strong> dan bacaan singkat dari tanggal lahir Anda. Boleh dikosongkan. Khusus usia '+MIN_AGE+' tahun ke atas.</p></div>'+
+          '<label class="rep-agree" for="mg-agree"><input type="checkbox" id="mg-agree"><span>Ya, saya bersedia menerima voucher lewat WhatsApp, dan setuju nama, nomor WhatsApp, tanggal lahir (jika saya isi), serta jawaban survey saya disimpan oleh Mosgo untuk pengiriman voucher dan perbaikan layanan.</span></label>'+
           '<div class="rep-err" id="mg-err" role="alert"></div>'+
           '<button type="button" class="btn-prim green rep-send" id="mg-send">Simpan Nomor &amp; Lanjut ke WhatsApp</button>'+
           '<div class="legal-disclaimer">Voucher tunduk pada syarat dan ketentuan yang tertera saat dikirim.</div></div>';
@@ -544,14 +573,23 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
     const raw=$('mg-wa').value.trim(); const w=normWA(raw);
     if(!raw){ vErr('Isi nomor WhatsApp Anda.'); return; }
     if(!/^62\d{8,13}$/.test(w)){ vErr('Nomor WhatsApp tidak valid. Contoh: 0812XXXXXXXX.'); return; }
+
+    const dobRaw=($('mg-dob').value||'').trim();
+    if(dobRaw){
+      const dd=parseDob(dobRaw);
+      if(!dd){ vErr('Tanggal lahir tidak valid. Perbaiki atau kosongkan kolomnya.'); return; }
+      if(dd.age<MIN_AGE){ vErr('Bonus ulang tahun untuk usia '+MIN_AGE+' tahun ke atas. Kosongkan kolom tanggal lahir untuk melanjutkan.'); return; }
+    }
+
     if(!ag.checked){ vErr('Centang persetujuan terlebih dahulu.'); return; }
     const used=parseInt(lsGet('mg_used')||'0',10);
     if(used>=MAX_USE){ vErr('Batas pengisian tercapai. Silakan coba lagi esok hari.'); return; }
 
     sd.disabled=true; sd.innerHTML='<span class="spin"></span> Menyimpan data...';
-    const finish=function(d){ sent=true; lsSet('mg_used',String(used+1)); track('MG_VoucherSaved'); done(w,d); };
+    const finish=function(d){ sent=true; lsSet('mg_used',String(used+1)); track('MG_VoucherSaved'); done(w,!!dobRaw); };
     if(DEMO){ setTimeout(function(){ finish({demo:true}); },700); return; }
-    fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload({action:'save_voucher_lead',wa:w}))})
+    const extra={action:'save_voucher_lead',wa:w}; if(dobRaw) extra.tgl_lahir=dobRaw;
+    fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload(extra))})
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
       .then(function(txt){
         let d; try{ d=JSON.parse(txt); }catch(e){ throw new Error('respons server tidak valid'); }
@@ -565,13 +603,14 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
       });
   }
 
-  function done(w){
+  function done(w,hasDob){
     const card=$('mg-rep'); if(!card) return;
     setProgress(100);
     const waText='Halo Mosgo, saya '+nama+' sudah mengisi survey. Mohon kirimkan voucher pembelian ulang saya.';
     const waLink='https://wa.me/'+WA_BUSINESS+'?text='+encodeURIComponent(waText);
+    const bd = hasDob ? '<br><br>🎂 <strong>Bonus voucher ulang tahun</strong> juga akan ikut dikirim.' : '';
     card.innerHTML='<div class="done"><div class="done-check">✓</div><h4>Nomor Anda berhasil didaftarkan</h4>'+
-      '<p>Hai <strong>'+esc(nama)+'</strong>, supaya voucher sampai dengan aman, silakan klik tombol di bawah ini. <br><br><strong>WhatsApp Anda akan terbuka dengan pesan otomatis ke kami, dan voucher dikirim setelah pesan itu masuk.</strong></p>'+
+      '<p>Hai <strong>'+esc(nama)+'</strong>, supaya voucher sampai dengan aman, silakan klik tombol di bawah ini.'+bd+'<br><br><strong>WhatsApp Anda akan terbuka dengan pesan otomatis ke kami, dan voucher dikirim setelah pesan itu masuk.</strong></p>'+
       '<a class="btn-prim wa-btn" id="mg-wa-link" href="'+waLink+'" target="_blank" rel="noopener">💬 Buka WhatsApp &amp; Terima Voucher</a>'+
       '<div class="must-click"><strong>Penting:</strong> Tekan tombol di atas untuk mengonfirmasi. Voucher baru dikirim <em>setelah</em> Anda memulai chat WhatsApp ini, sesuai kebijakan pesan WhatsApp.</div></div>';
     scrollDown();
@@ -580,7 +619,8 @@ textarea.field-input:focus-visible,input.field-input:focus-visible{outline:none;
     if(wa) wa.addEventListener('click',function(){
       track('MG_WhatsAppClick');
       if(DEMO) return;
-      fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'trigger_send_voucher',wa:w,nama:nama})}).catch(function(){});
+      const body={action:'trigger_send_voucher',wa:w,nama:nama}; if(APP_KEY) body.k=APP_KEY;
+      fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).catch(function(){});
     });
   }
 
